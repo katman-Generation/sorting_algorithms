@@ -1,50 +1,27 @@
 #include "sort.h"
 
 /**
- * swap_pos - swaps position of values in array
- *
- * @array: array to be changed
- * @first: first index
- * @second: second index
+ * bubble_sort - function that sort an array using bubble sort
+ * @array: the array to be sorted
+ * @size: the size of the array 
+ * 
  */
-void swap_pos(int **array, size_t first, size_t second)
+void bubble_sort(int *array, size_t size);
 {
-	int holder;
+	size_t swap, i, j,t;
 
-	holder = (*array)[first];
-	(*array)[first] = (*array)[second];
-	(*array)[second] = holder;
-}
-
-/**
- * bubble_sort - sorting algorithm that sorts in form
- * of a bubble
- *
- * @array: array to be sorted
- * @size: size of the array
- */
-void bubble_sort(int *array, size_t size)
-{
-	size_t i, j, flag;
-
-	if (size < 2)
-		return;
-
-	for (i = 0; i < size; i++)	/* go through the array */
+	for (i = 0; i < size; i++)
 	{
-		flag = 0;
-		for (j = 0; j < size - i - 1; j++)	/* loop only the unsorted */
+		for (j = 0; j < (size - 1); j++)
 		{
 			if (array[j] > array[j + 1])
 			{
-				swap_pos(&array, j, j + 1);
+				swap = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = swap;
+
 				print_array(array, size);
-				flag = 1;
 			}
 		}
-
-		/* check if no swap occured (meaning array is sorted) */
-		if (!flag)
-			break;
 	}
 }
