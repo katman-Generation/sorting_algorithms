@@ -6,9 +6,9 @@
  * @size: the size of the array 
  * 
  */
-void bubble_sort(int *array, size_t size);
+void bubble_sort(int *array, size_t size)
 {
-	size_t swap, i, j,t;
+	size_t swap, i, j;
 
 	for (i = 0; i < size; i++)
 	{
