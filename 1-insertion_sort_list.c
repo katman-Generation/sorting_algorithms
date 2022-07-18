@@ -1,49 +1,40 @@
 #include "sort.h"
+
 /**
- * insertion_sort_list - function that sorts a
- * doubly linked list of integers in ascending
- * order using the Insertion sort algorithm
- * @list: Doubly linked list
- *
- * Return: void
- **/
+ * insertion_sort_list -  sorts a doubly linked list of integers
+ * in ascending order using the Insertion sort algorithm.
+ * @list: given dl list
+ */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *aux = NULL;
-	bool trig = false;
+	listint_t *current, *temp;
 
-	if (!list || !(*list) || !(*list)->next)
+	if (!list)
 		return;
 
-	aux = *list;
-	while (aux->next)
+	for (current = *list; current; current = current->next)
 	{
-		if (aux->n > (aux->next)->n)
+		while (current->next && (current->next->n < current->n))
 		{
-			(aux->next)->prev = aux->prev;
+			temp = current->next;
+			current->next = temp->next;
+			temp->prev = current->prev;
 
-			if ((aux->next)->prev)
-				(aux->prev)->next = aux->next;
+			if (current->prev)
+				current->prev->next = temp;
+
+			if (temp->next)
+				temp->next->prev = current;
+
+			current->prev = temp;
+			temp->next = current;
+
+			if (temp->prev)
+				current = temp->prev;
 			else
-				*list = aux->next;
+				*list = temp;
 
-			aux->prev = aux->next;
-			aux->next = (aux->next)->next;
-			(aux->prev)->next = aux;
-			if (aux->next)
-				aux->next->prev = aux;
-			aux = aux->prev;
 			print_list(*list);
-
-			if (aux->prev && aux->prev->n > aux->n)
-			{
-				aux = aux->prev;
-				trig = true;
-			}
 		}
-		if (trig == false)
-			aux = aux->next;
-		else
-			trig = false;
 	}
 }
