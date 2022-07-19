@@ -4,8 +4,8 @@
  * swappos - swaps position of values in array
  *
  * @array: array to be changed
- * @first: first index
- * @second: second index
+ * @x: first index
+ * @y: second index
  */
 void swappos(int **array, size_t x, size_t y)
 {
